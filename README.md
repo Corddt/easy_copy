@@ -39,4 +39,4 @@ Contributions, issues, and feature requests are welcome. Feel free to check [iss
 Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
-Project Link: [https://github.com/Corddt/easy_copy](https://github.com/Corddt/easy_copy)
+Project Link: [https://github.com/Corddt](https://github.com/Corddt)
