@@ -34,7 +34,7 @@ To run this project locally:
 2. Open the `index.html` file in a web browser.
 
 ## Contributing
-Contributions, issues, and feature requests are welcome. Feel free to check [issues page](link-to-issues-page) if you want to contribute.
+Contributions, issues, and feature requests are welcome. Feel free to check [issues page](https://github.com/Corddt/easy_copy/issues/1) if you want to contribute.
 
 ## License
 Distributed under the MIT License. See `LICENSE` for more information.
