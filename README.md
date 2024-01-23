@@ -1,14 +1,15 @@
+English | [简体中文](README_zh.md)
 # EASY COPY
 ## Web Link: 
 [Easy Copy](https://corddt.github.io/easy_copy/)
 
-## Overview
-This project is a simple web application that provides a user-friendly interface for uploading, displaying, and copying the contents of text files. Users can upload multiple files either by using the file input or by dragging and dropping files into a designated area. The contents of these files are displayed on the webpage, and there is also functionality to copy the contents of all uploaded files to the clipboard.
+### Overview
+This web application is specifically designed to simplify the file handling process. Normally, if users want to copy content from multiple text files, they have to open each file and copy the contents one by one, which is not only time-consuming but also inefficient. To address this issue, the app provides a simple and intuitive interface through which users can easily upload, display, and copy the content of one or more text files. Users can upload files using the file selection dialog or by directly dragging and dropping files into a designated area on the webpage. Once uploaded, the contents of the files are displayed on the webpage. Most importantly, the app also offers a feature that allows users to copy the contents of all uploaded files with a single click, greatly enhancing efficiency.
 
-## Features
-- **File Upload:** Users can upload files either by selecting them through the file input or by dragging and dropping them into the specified area.
-- **File Content Display:** The contents of the uploaded files are displayed in an organized and readable format on the webpage.
-- **Copy All Functionality:** Users have the option to copy the contents of all uploaded files to the clipboard with a single click.
+### Features
+- **File Upload:** The application supports two methods of uploading files. Users can select files they wish to upload via the standard file selection dialog, or more conveniently, by directly dragging and dropping files into a designated area on the webpage. This flexible method of uploading makes handling multiple files simple and fast.
+- **File Content Display:** Once files are uploaded, their contents are immediately displayed on the webpage in a well-organized and easy-to-read format. This allows users to quickly view the contents of each file and confirm that the correct files have been uploaded.
+- **Copy All Feature:** One of the key features is the "Copy All" button. This button allows users to copy all the file contents displayed on the page to the clipboard with a single click. This means that no matter how many files users upload, they can easily copy the contents of all files at once, saving time and increasing work efficiency.
 
 ## How to Use
 1. **Uploading Files:**
