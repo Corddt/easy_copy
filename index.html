@@ -4,139 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link rel="stylesheet" href="styles.css">
     <title>File Reading and Display</title>
-    <style>
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        .file-upload {
-            padding: 20px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
-        .file-display {
-            padding: 20px;
-            border: 1px solid #ddd;
-            height: 400px;
-            overflow: auto;
-        }
-        .file-upload.active {
-            background-color: #f0f0f0; /* Background color when dragging */
-            border-color: #aaa; /* Border color when dragging */
-        }
-
-        .copy-button {
-            margin-top: 10px;
-            padding: 5px 10px;
-            background-color: #ddd;
-            border: none;
-            cursor: pointer;
-        }
-
-    </style>
 </head>
 <body>
-    <nav class="container-fluid">
-        <ul>
-            <li><strong>File Processing Webpage</strong></li>
-        </ul>
-        <ul>
-            <li><a href="https://github.com/Corddt" role="button">Contact Me</a></li>
-        </ul>
-    </nav>
+<nav class="container-fluid">
+    <ul>
+        <li><strong>File Processing Webpage</strong></li>
+    </ul>
+    <ul>
+        <li><a href="https://github.com/Corddt" role="button">Contact Me</a></li>
+    </ul>
+</nav>
 
-    <main class="container"></main>
-        <div class="grid">
-            <section class="file-upload">
-                <h2>Upload File</h2>
-                <input type="file" id="fileInput" multiple>
-                <p>Drag and drop files here.</p>
-            </section>
-            <section class="file-display">
-                <h2>File Content Display</h2>
-                <div id="fileContent">File content will be displayed here</div>
-            </section>
-        </div>
-    </main>
+<main class="container">
+    <div class="grid">
+        <section class="file-upload">
+            <h2>Upload File</h2>
+            <input type="file" id="fileInput" multiple>
+            <p>Drag and drop files here.</p>
+        </section>
+        <section class="file-display">
+            <h2>File Content Display</h2>
+            <button id="copyAllButton" class="copy-button" style="display: none;">Copy All Files</button>
+            <div id="fileContent">File content will be displayed here</div>
+        </section>
+    </div>
+</main>
+
+<script src="script.js"></script>
 </body>
-<script>
-const fileUploadSection = document.getElementById('fileInput').parentNode;
-document.getElementById('fileInput').addEventListener('change', handleFiles);
-fileUploadSection.addEventListener('drop', handleDrop);
-fileUploadSection.addEventListener('dragover', handleDragOver);
-fileUploadSection.addEventListener('dragleave', handleDragLeave);
-
-function handleDragOver(event) {
-    event.preventDefault();
-    fileUploadSection.classList.add('active');
-}
-
-function handleDragLeave() {
-    fileUploadSection.classList.remove('active');
-}
-
-function handleFiles(event) {
-    fileUploadSection.classList.remove('active');
-    const files = event.target.files || event.dataTransfer.files;
-    readAndDisplayFiles(files);
-}
-
-function handleDrop(event) {
-    event.preventDefault();
-    fileUploadSection.classList.remove('active');
-    const files = event.dataTransfer.files;
-    readAndDisplayFiles(files);
-}
-
-function readAndDisplayFiles(files) {
-    const displayArea = document.getElementById('fileContent');
-    displayArea.innerHTML = ''; // Clear previous content
-
-    let allFileContents = ""; // Store the content of all files
-    let filesRead = 0; // Keep track of the number of files read
-
-    Array.from(files).forEach(file => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const fileContent = e.target.result;
-            allFileContents += `File Name: ${file.name}\n${fileContent}\n\n`; // Add file name and content to the total content
-            displayArea.innerHTML += `<h3>${file.name}</h3><pre>${escapeHtml(fileContent)}</pre>`;
-            filesRead++;
-
-            // Add copy button when all files have been read
-            if (filesRead === files.length) {
-                addCopyAllButton(allFileContents, displayArea);
-            }
-        };
-        reader.readAsText(file);
-    });
-}
-
-function addCopyAllButton(allFileContents, displayArea) {
-    const copyAllButton = document.createElement('button');
-    copyAllButton.classList.add('copy-button');
-    copyAllButton.textContent = 'Copy All Files';
-    copyAllButton.onclick = () => copyToClipboard(allFileContents);
-    displayArea.appendChild(copyAllButton);
-}
-
-
-function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => {
-        alert('All file contents have been copied to the clipboard');
-    });
-}
-
-function escapeHtml(text) {
-    return text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
-
-</script>
 </html>
