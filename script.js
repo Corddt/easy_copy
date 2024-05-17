@@ -61,7 +61,10 @@ function readFileAsText(file) {
 function showCopyAllButton(allFileContents) {
     const copyAllButton = document.getElementById('copyAllButton');
     copyAllButton.style.display = 'inline-block';
-    copyAllButton.onclick = () => copyToClipboard(allFileContents);
+    copyAllButton.onclick = () => {
+        const prompt = document.getElementById('promptInput').value;
+        copyToClipboard(prompt + '\n\n' + allFileContents);
+    };
 }
 
 async function copyToClipboard(text) {
