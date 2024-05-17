@@ -29,9 +29,10 @@
             <h2>File Content Display</h2>
             <div>
                 <label for="promptInput">Prompt:</label>
-                <input type="text" id="promptInput" placeholder="Enter your prompt">
+                <textarea id="promptInput" placeholder="Enter your prompt" rows="4"></textarea>
             </div>
             <button id="copyAllButton" class="copy-button" style="display: none;">Copy All Files</button>
+            <p id="fileCount">Files: 0</p> <!-- 添加这一行来显示文件数量 -->
             <div id="fileContent">File content will be displayed here</div>
         </section>
     </div>

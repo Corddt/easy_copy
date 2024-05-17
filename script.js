@@ -1,6 +1,8 @@
 const fileUploadSection = document.getElementById('fileInput').parentNode;
 const fileInput = document.getElementById('fileInput');
 const displayArea = document.getElementById('fileContent');
+const copyAllButton = document.getElementById('copyAllButton');
+const fileCount = document.getElementById('fileCount'); // 获取文件数量显示元素
 
 fileInput.addEventListener('change', handleFiles);
 fileUploadSection.addEventListener('drop', handleDrop);
@@ -29,58 +31,39 @@ function handleDrop(event) {
     readAndDisplayFiles(files);
 }
 
-async function readAndDisplayFiles(files) {
-    displayArea.innerHTML = '';
+function readAndDisplayFiles(files) {
+    displayArea.innerHTML = ''; // 清空显示区域
+    fileCount.textContent = `Files: ${files.length}`; // 更新文件数量
 
-    let allFileContents = "";
-    let filesRead = 0;
+    if (files.length > 0) {
+        copyAllButton.style.display = 'block';
+    } else {
+        copyAllButton.style.display = 'none';
+    }
 
-    Array.from(files).forEach(async (file) => {
-        if (!file.isDirectory) {
-            const fileContent = await readFileAsText(file);
-            allFileContents += `File Name: ${file.name}\n${fileContent}\n\n`;
-            displayArea.innerHTML += `<h3>${file.name}</h3><pre>${escapeHtml(fileContent)}</pre>`;
-            filesRead++;
-
-            if (filesRead === files.length) {
-                showCopyAllButton(allFileContents);
-            }
-        }
-    });
-}
-
-function readFileAsText(file) {
-    return new Promise((resolve, reject) => {
+    Array.from(files).forEach(file => {
         const reader = new FileReader();
-        reader.onload = (e) => resolve(e.target.result);
-        reader.onerror = (e) => reject(e);
+        reader.onload = (e) => {
+            const fileContent = document.createElement('pre');
+            fileContent.textContent = `File: ${file.name}\n\n${e.target.result}`;
+            displayArea.appendChild(fileContent);
+        };
         reader.readAsText(file);
     });
 }
 
-function showCopyAllButton(allFileContents) {
-    const copyAllButton = document.getElementById('copyAllButton');
-    copyAllButton.style.display = 'inline-block';
-    copyAllButton.onclick = () => {
-        const prompt = document.getElementById('promptInput').value;
-        copyToClipboard(prompt + '\n\n' + allFileContents);
-    };
-}
+copyAllButton.addEventListener('click', () => {
+    const prompt = document.getElementById('promptInput').value;
+    let combinedContent = `${prompt}\n\n`;
 
-async function copyToClipboard(text) {
-    try {
-        await navigator.clipboard.writeText(text);
-        alert('All file contents have been copied to the clipboard');
-    } catch (err) {
-        console.error('Failed to copy text: ', err);
-    }
-}
+    const fileContents = displayArea.querySelectorAll('pre');
+    fileContents.forEach(pre => {
+        combinedContent += pre.textContent + '\n\n';
+    });
 
-function escapeHtml(text) {
-    return text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
+    navigator.clipboard.writeText(combinedContent).then(() => {
+        alert('All files and prompt copied to clipboard!');
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+    });
+});

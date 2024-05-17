@@ -58,3 +58,11 @@ pre {
     padding: 10px;
     border-radius: 5px;
 }
+
+textarea#promptInput {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #ddd;
+    resize: vertical;
+}
