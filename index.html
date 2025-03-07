@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Pico CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/x-icon" href="favicon.webp">
-    <title>File Reading and Display</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/x-icon" href="favicon.webp" />
+    <title>File Processing</title>
 </head>
 <body>
 <nav class="container-fluid">
@@ -19,23 +20,41 @@
 </nav>
 
 <main class="container">
-    <div class="grid">
-        <section class="file-upload">
-            <h2>Upload File</h2>
-            <input type="file" id="fileInput" multiple>
-            <p>Drag and drop files here.</p>
-        </section>
-        <section class="file-display">
-            <h2>File Content Display</h2>
-            <div>
-                <label for="promptInput">Prompt:</label>
-                <textarea id="promptInput" placeholder="Enter your prompt" rows="4"></textarea>
-            </div>
-            <button id="copyAllButton" class="copy-button" style="display: none;">Copy All Files</button>
-            <p id="fileCount">Files: 0</p> <!-- 添加这一行来显示文件数量 -->
-            <div id="fileContent">File content will be displayed here</div>
-        </section>
+    <!-- 切换按钮 -->
+    <div class="toggle-container">
+        <button id="toggleFileReader" class="toggle-button active">File Reader</button>
+        <button id="toggleFolderExplorer" class="toggle-button">Folder Explorer</button>
     </div>
+
+    <!-- File Reader 区域 -->
+    <section id="fileReaderSection" class="section">
+        <div class="grid">
+            <section class="file-upload">
+                <h2>Upload File</h2>
+                <input type="file" id="fileInput" multiple />
+                <p>Drag and drop files here.</p>
+            </section>
+            <section class="file-display">
+                <h2>File Content Display</h2>
+                <div>
+                    <label for="promptInput">Prompt:</label>
+                    <textarea id="promptInput" placeholder="Enter your prompt" rows="4"></textarea>
+                </div>
+                <button id="copyAllButton" class="copy-button" style="display: none;">Copy All Files</button>
+                <p id="fileCount">Files: 0</p>
+                <div id="fileContent">File content will be displayed here</div>
+            </section>
+        </div>
+    </section>
+
+    <!-- Folder Explorer 区域 -->
+    <section id="folderExplorerSection" class="section" style="display:none;">
+        <h2>Folder Explorer</h2>
+        <input type="file" id="folderInput" webkitdirectory directory multiple>
+        <p>Select a folder here (Chrome/Edge only).</p>
+        <pre id="folderTree">Folder structure will be displayed here</pre>
+    </section>
+
 </main>
 
 <script src="script.js"></script>
